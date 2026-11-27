@@ -6,7 +6,6 @@ Summary:        FlagFFT — C++ FFT library for FlagOS (NVIDIA backend)
 License:        Apache-2.0
 URL:            https://github.com/flagos-ai/FlagFFT
 Source0:        %{name}-%{version}.tar.gz
-Patch0:         0001-triton-jit-relax-nlohmann-json-floor.patch
 
 # The CUDA driver and pip-installed Torch libraries are runtime prerequisites,
 # but they are not owned by RPM packages in the container build environment.
@@ -15,7 +14,6 @@ Patch0:         0001-triton-jit-relax-nlohmann-json-floor.patch
 # CUDA/PyTorch/Triton/pybind11 are container-provided.
 BuildRequires:  binutils
 BuildRequires:  cmake >= 3.18
-BuildRequires:  patch
 BuildRequires:  python3-ninja
 BuildRequires:  gcc-c++
 BuildRequires:  python3-devel
@@ -41,7 +39,7 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 Header files for building applications against libflagfft-nvidia.
 
 %prep
-%autosetup -p1 -n %{name}-%{version}
+%autosetup -n %{name}-%{version}
 
 %build
 # Ensure pip-installed packages (torch, triton, pybind11) are visible.

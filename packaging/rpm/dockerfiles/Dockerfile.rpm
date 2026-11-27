@@ -12,7 +12,6 @@ RUN dnf install -y --allowerasing \
     make \
     fmt-devel \
     nlohmann-json-devel \
-    patch \
     python3-devel \
     python3-pip \
     sqlite-devel \
@@ -47,7 +46,6 @@ RUN VERSION=$(awk -F'"' '/^libflagfft \(/ {gsub(/-.*/, "", $0); print}' packagin
     mkdir -p /root/rpmbuild/SOURCES /tmp/src && \
     cp -r /workspace/flagfft /tmp/src/libflagfft-nvidia-${VERSION} && \
     tar czf /root/rpmbuild/SOURCES/libflagfft-nvidia-${VERSION}.tar.gz -C /tmp/src libflagfft-nvidia-${VERSION} && \
-    cp packaging/rpm/patches/*.patch /root/rpmbuild/SOURCES/ && \
     cp packaging/rpm/specs/flagfft.spec /root/rpmbuild/SPECS/
 
 RUN rpmbuild -bb /root/rpmbuild/SPECS/flagfft.spec || \
